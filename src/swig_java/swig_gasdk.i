@@ -1,6 +1,7 @@
 %module GDK
 %{
 #include "../../include/gdk.h"
+#include "../../include/greenlight.h"
 #include <limits.h>
 
 /* Make local functions visible to the O/S for better JVM stack traces */
@@ -509,6 +510,7 @@ LOCALFUNC jbyteArray create_array(JNIEnv *jenv, const unsigned char* p, size_t l
 %returns_struct(GA_get_credentials, GA_auth_handler)
 %returns_struct(GA_get_fee_estimates, GA_json)
 %returns_struct(GA_get_networks, GA_json)
+%returns_uint32(GA_greenlight_stub)
 %returns_struct(GA_get_previous_addresses, GA_auth_handler)
 %returns_array_(GA_get_random_bytes, 2, 3, jarg1)
 %returns_uint32(GA_get_uniform_uint32_t)

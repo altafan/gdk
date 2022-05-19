@@ -8,6 +8,7 @@
 #include "exception.hpp"
 #include "ga_auth_handlers.hpp"
 #include "include/gdk.h"
+#include "include/greenlight.h"
 #include "network_parameters.hpp"
 #include "session.hpp"
 #include "utils.hpp"
@@ -423,6 +424,11 @@ GDK_DEFINE_C_FUNCTION_2(GA_register_network, const char*, name, const GA_json*, 
     { ga::sdk::network_parameters::add(name, *json_cast(network_details)); });
 
 GDK_DEFINE_C_FUNCTION_1(GA_get_networks, GA_json**, output,
+    { *json_cast(output) = new nlohmann::json(ga::sdk::network_parameters::get_all()); });
+
+GDK_DEFINE_C_FUNCTION_1(GA_greenlight_stub, GA_json**, output,
+    { *json_cast(output) = new nlohmann::json(ga::sdk::network_parameters::get_all()); });
+GDK_DEFINE_C_FUNCTION_1(GA_greenlight_stub_2, GA_json**, output,
     { *json_cast(output) = new nlohmann::json(ga::sdk::network_parameters::get_all()); });
 
 GDK_DEFINE_C_FUNCTION_2(GA_get_uniform_uint32_t, uint32_t, upper_bound, uint32_t*, output,
