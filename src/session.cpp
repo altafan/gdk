@@ -399,6 +399,82 @@ namespace sdk {
         return p->get_network_parameters(); // Note no exception_wrapper
     }
 
+    nlohmann::json session::gl_close(const nlohmann::json& params)
+    {
+        // TODO implement
+        return nlohmann::json(params);
+    }
+    nlohmann::json session::gl_connect(const nlohmann::json& params)
+    {
+        // TODO implement
+        return nlohmann::json(params);
+    }
+    nlohmann::json session::gl_destroy(const nlohmann::json& params)
+    {
+        // TODO implement
+        return nlohmann::json(params);
+    }
+    nlohmann::json session::gl_disconnect(const nlohmann::json& params)
+    {
+        // TODO implement
+        return nlohmann::json(params);
+    }
+    nlohmann::json session::gl_fundchannel(const nlohmann::json& params)
+    {
+        // TODO implement
+        return nlohmann::json(params);
+    }
+    nlohmann::json session::gl_getinfo(const nlohmann::json& params)
+    {
+        // TODO implement
+        return nlohmann::json(params);
+    }
+    nlohmann::json session::gl_hsmd(const nlohmann::json& params)
+    {
+        // TODO implement
+        return nlohmann::json(params);
+    }
+    nlohmann::json session::gl_invoice(const nlohmann::json& params)
+    {
+        // TODO implement
+        return nlohmann::json(params);
+    }
+    nlohmann::json session::gl_listfunds(const nlohmann::json& params)
+    {
+        // TODO implement
+        return nlohmann::json(params);
+    }
+    nlohmann::json session::gl_listpeers(const nlohmann::json& params)
+    {
+        // TODO implement
+        return nlohmann::json(params);
+    }
+    nlohmann::json session::gl_newaddr(const nlohmann::json& params)
+    {
+        // TODO implement
+        return nlohmann::json(params);
+    }
+    nlohmann::json session::gl_pay(const nlohmann::json& params)
+    {
+        // TODO implement
+        return nlohmann::json(params);
+    }
+    nlohmann::json session::gl_scheduler(const nlohmann::json& params)
+    {
+        // TODO implement
+        return nlohmann::json(params);
+    }
+    nlohmann::json session::gl_stop(const nlohmann::json& params)
+    {
+        // TODO implement
+        return nlohmann::json(params);
+    }
+    nlohmann::json session::gl_withdraw(const nlohmann::json& params)
+    {
+        // TODO implement
+        return nlohmann::json(params);
+    }
+
     session::impl_ptr session::get_nonnull_impl() const
     {
         auto impl = get_impl();

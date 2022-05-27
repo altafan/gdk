@@ -295,6 +295,50 @@ class Session(object):
     def validate_asset_domain_name(self, params):
         return json.loads(validate_asset_domain_name(self.session_obj, self._to_json(params)))
 
+    def gl_close(self, params):
+        return json.loads(gl_close(self.session_obj, self._to_json(params)))
+
+    def gl_connect(self, params):
+        return json.loads(gl_connect(self.session_obj, self._to_json(params)))
+
+    def gl_destroy(self, params):
+        return json.loads(gl_destroy(self.session_obj, self._to_json(params)))
+
+    def gl_disconnect(self, params):
+        return json.loads(gl_disconnect(self.session_obj, self._to_json(params)))
+
+    def gl_fundchannel(self, params):
+        return json.loads(gl_fundchannel(self.session_obj, self._to_json(params)))
+
+    def gl_getinfo(self, params):
+        return json.loads(gl_getinfo(self.session_obj, self._to_json(params)))
+
+    def gl_hsmd(self, params):
+        return json.loads(gl_hsmd(self.session_obj, self._to_json(params)))
+
+    def gl_invoice(self, params):
+        return json.loads(gl_invoice(self.session_obj, self._to_json(params)))
+
+    def gl_listfunds(self, params):
+        return json.loads(gl_listfunds(self.session_obj, self._to_json(params)))
+
+    def gl_listpeers(self, params):
+        return json.loads(gl_listpeers(self.session_obj, self._to_json(params)))
+
+    def gl_newaddr(self, params):
+        return json.loads(gl_newaddr(self.session_obj, self._to_json(params)))
+
+    def gl_pay(self, params):
+        return json.loads(gl_pay(self.session_obj, self._to_json(params)))
+
+    def gl_scheduler(self, params):
+        return json.loads(gl_scheduler(self.session_obj, self._to_json(params)))
+
+    def gl_stop(self, params):
+        return json.loads(gl_stop(self.session_obj, self._to_json(params)))
+
+    def gl_withdraw(self, params):
+        return json.loads(gl_withdraw(self.session_obj, self._to_json(params)))
 
 _old_get_networks = get_networks
 def get_networks():

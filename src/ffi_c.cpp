@@ -426,11 +426,6 @@ GDK_DEFINE_C_FUNCTION_2(GA_register_network, const char*, name, const GA_json*, 
 GDK_DEFINE_C_FUNCTION_1(GA_get_networks, GA_json**, output,
     { *json_cast(output) = new nlohmann::json(ga::sdk::network_parameters::get_all()); });
 
-GDK_DEFINE_C_FUNCTION_1(GA_greenlight_stub, GA_json**, output,
-    { *json_cast(output) = new nlohmann::json(ga::sdk::network_parameters::get_all()); });
-GDK_DEFINE_C_FUNCTION_1(GA_greenlight_stub_2, GA_json**, output,
-    { *json_cast(output) = new nlohmann::json(ga::sdk::network_parameters::get_all()); });
-
 GDK_DEFINE_C_FUNCTION_2(GA_get_uniform_uint32_t, uint32_t, upper_bound, uint32_t*, output,
     { *output = ga::sdk::get_uniform_uint32_t(upper_bound); });
 
@@ -512,3 +507,48 @@ GDK_DEFINE_C_FUNCTION_3(GA_convert_json_value_to_json, const GA_json*, json, con
     json_convert(*json_cast(json), path, v);
     *json_cast(output) = v;
 })
+
+GDK_DEFINE_C_FUNCTION_3(GA_gl_close, struct GA_session*, session, const GA_json*, params, GA_json**, output,
+    { *json_cast(output) = new nlohmann::json(session->gl_close(*json_cast(params))); })
+
+GDK_DEFINE_C_FUNCTION_3(GA_gl_connect, struct GA_session*, session, const GA_json*, params, GA_json**, output,
+    { *json_cast(output) = new nlohmann::json(session->gl_connect(*json_cast(params))); })
+
+GDK_DEFINE_C_FUNCTION_3(GA_gl_destroy, struct GA_session*, session, const GA_json*, params, GA_json**, output,
+    { *json_cast(output) = new nlohmann::json(session->gl_destroy(*json_cast(params))); })
+
+GDK_DEFINE_C_FUNCTION_3(GA_gl_disconnect, struct GA_session*, session, const GA_json*, params, GA_json**, output,
+    { *json_cast(output) = new nlohmann::json(session->gl_disconnect(*json_cast(params))); })
+
+GDK_DEFINE_C_FUNCTION_3(GA_gl_fundchannel, struct GA_session*, session, const GA_json*, params, GA_json**, output,
+    { *json_cast(output) = new nlohmann::json(session->gl_fundchannel(*json_cast(params))); })
+
+GDK_DEFINE_C_FUNCTION_3(GA_gl_getinfo, struct GA_session*, session, const GA_json*, params, GA_json**, output,
+    { *json_cast(output) = new nlohmann::json(session->gl_getinfo(*json_cast(params))); })
+
+GDK_DEFINE_C_FUNCTION_3(GA_gl_hsmd, struct GA_session*, session, const GA_json*, params, GA_json**, output,
+    { *json_cast(output) = new nlohmann::json(session->gl_hsmd(*json_cast(params))); })
+
+GDK_DEFINE_C_FUNCTION_3(GA_gl_invoice, struct GA_session*, session, const GA_json*, params, GA_json**, output,
+    { *json_cast(output) = new nlohmann::json(session->gl_invoice(*json_cast(params))); })
+
+GDK_DEFINE_C_FUNCTION_3(GA_gl_listfunds, struct GA_session*, session, const GA_json*, params, GA_json**, output,
+    { *json_cast(output) = new nlohmann::json(session->gl_listfunds(*json_cast(params))); })
+
+GDK_DEFINE_C_FUNCTION_3(GA_gl_listpeers, struct GA_session*, session, const GA_json*, params, GA_json**, output,
+    { *json_cast(output) = new nlohmann::json(session->gl_listpeers(*json_cast(params))); })
+
+GDK_DEFINE_C_FUNCTION_3(GA_gl_newaddr, struct GA_session*, session, const GA_json*, params, GA_json**, output,
+    { *json_cast(output) = new nlohmann::json(session->gl_newaddr(*json_cast(params))); })
+
+GDK_DEFINE_C_FUNCTION_3(GA_gl_pay, struct GA_session*, session, const GA_json*, params, GA_json**, output,
+    { *json_cast(output) = new nlohmann::json(session->gl_pay(*json_cast(params))); })
+
+GDK_DEFINE_C_FUNCTION_3(GA_gl_scheduler, struct GA_session*, session, const GA_json*, params, GA_json**, output,
+    { *json_cast(output) = new nlohmann::json(session->gl_scheduler(*json_cast(params))); })
+
+GDK_DEFINE_C_FUNCTION_3(GA_gl_stop, struct GA_session*, session, const GA_json*, params, GA_json**, output,
+    { *json_cast(output) = new nlohmann::json(session->gl_stop(*json_cast(params))); })
+
+GDK_DEFINE_C_FUNCTION_3(GA_gl_withdraw, struct GA_session*, session, const GA_json*, params, GA_json**, output,
+    { *json_cast(output) = new nlohmann::json(session->gl_withdraw(*json_cast(params))); })

@@ -74,6 +74,23 @@ namespace sdk {
 
         const network_parameters& get_network_parameters() const;
 
+        // Greenlight methods
+        nlohmann::json gl_close(const nlohmann::json& details);
+        nlohmann::json gl_connect(const nlohmann::json& details);
+        nlohmann::json gl_destroy(const nlohmann::json& details);
+        nlohmann::json gl_disconnect(const nlohmann::json& details);
+        nlohmann::json gl_fundchannel(const nlohmann::json& details);
+        nlohmann::json gl_getinfo(const nlohmann::json& details);
+        nlohmann::json gl_hsmd(const nlohmann::json& details);
+        nlohmann::json gl_invoice(const nlohmann::json& details);
+        nlohmann::json gl_listfunds(const nlohmann::json& details);
+        nlohmann::json gl_listpeers(const nlohmann::json& details);
+        nlohmann::json gl_newaddr(const nlohmann::json& details);
+        nlohmann::json gl_pay(const nlohmann::json& details);
+        nlohmann::json gl_scheduler(const nlohmann::json& details);
+        nlohmann::json gl_stop(const nlohmann::json& details);
+        nlohmann::json gl_withdraw(const nlohmann::json& details);
+
         impl_ptr get_nonnull_impl() const;
 
         void exception_handler(std::exception_ptr ex_p);

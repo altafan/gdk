@@ -510,7 +510,6 @@ LOCALFUNC jbyteArray create_array(JNIEnv *jenv, const unsigned char* p, size_t l
 %returns_struct(GA_get_credentials, GA_auth_handler)
 %returns_struct(GA_get_fee_estimates, GA_json)
 %returns_struct(GA_get_networks, GA_json)
-%returns_uint32(GA_greenlight_stub)
 %returns_struct(GA_get_previous_addresses, GA_auth_handler)
 %returns_array_(GA_get_random_bytes, 2, 3, jarg1)
 %returns_uint32(GA_get_uniform_uint32_t)
@@ -554,6 +553,22 @@ LOCALFUNC jbyteArray create_array(JNIEnv *jenv, const unsigned char* p, size_t l
 %returns_void__(GA_auth_handler_request_code)
 %returns_void__(GA_auth_handler_resolve_code)
 %returns_uint32(GA_validate_mnemonic)
+
+%returns_struct(GA_gl_close, GA_json)
+%returns_struct(GA_gl_connect, GA_json)
+%returns_struct(GA_gl_destroy, GA_json)
+%returns_struct(GA_gl_disconnect, GA_json)
+%returns_struct(GA_gl_fundchannel, GA_json)
+%returns_struct(GA_gl_getinfo, GA_json)
+%returns_struct(GA_gl_hsmd, GA_json)
+%returns_struct(GA_gl_invoice, GA_json)
+%returns_struct(GA_gl_listfunds, GA_json)
+%returns_struct(GA_gl_listpeers, GA_json)
+%returns_struct(GA_gl_newaddr, GA_json)
+%returns_struct(GA_gl_pay, GA_json)
+%returns_struct(GA_gl_scheduler, GA_json)
+%returns_struct(GA_gl_stop, GA_json)
+%returns_struct(GA_gl_withdraw, GA_json)
 
 /* TODO
 GA_convert_json_value_to_bool
