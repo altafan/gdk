@@ -895,10 +895,11 @@ namespace sdk {
             const auto& net_params = session.get_network_parameters();
             const auto script_hash = get_script_hash(net_params, u, tx, index);
             const std::string private_key_hex = json_get_value(u, "private_key");
+            const uint32_t sighash = json_get_value(u, "user_sighash", WALLY_SIGHASH_ALL);
 
             if (!private_key_hex.empty()) {
                 const auto user_sig = ec_sig_from_bytes(h2b(private_key_hex), script_hash);
-                const auto der = ec_sig_to_der(user_sig, true);
+                const auto der = ec_sig_to_der(user_sig, true, sighash);
                 tx_set_input_script(tx, index, scriptsig_p2pkh_from_der(h2b(u.at("public_key")), der));
                 return b2h(der);
             } else {
@@ -909,7 +910,7 @@ namespace sdk {
                 const auto path = session.get_subaccount_full_path(subaccount, pointer, is_internal);
                 auto signer = session.get_nonnull_signer();
                 const auto user_sig = signer->sign_hash(path, script_hash);
-                const auto der = ec_sig_to_der(user_sig, true);
+                const auto der = ec_sig_to_der(user_sig, true, sighash);
 
                 if (is_segwit_address_type(u)) {
                     // TODO: If the UTXO is CSV and expired, spend it using the users key only (smaller)
@@ -921,7 +922,7 @@ namespace sdk {
                     tx_set_input_script(tx, index, witness_script(script, witness_ver));
                 } else {
                     const bool is_low_r = signer->supports_low_r();
-                    tx_set_input_script(tx, index, input_script(is_low_r, script, user_sig));
+                    tx_set_input_script(tx, index, input_script(is_low_r, script, user_sig, sighash));
                 }
                 return b2h(der);
             }
@@ -934,10 +935,11 @@ namespace sdk {
         const amount::value_type v = utxo.at("satoshi");
         const auto script = h2b(utxo.at("prevout_script"));
         const uint32_t flags = is_segwit_address_type(utxo) ? WALLY_TX_FLAG_USE_WITNESS : 0;
+        const uint32_t sighash = json_get_value(utxo, "user_sighash", WALLY_SIGHASH_ALL);
 
         if (!net_params.is_liquid()) {
             const amount satoshi{ v };
-            return tx_get_btc_signature_hash(tx, index, script, satoshi.value(), WALLY_SIGHASH_ALL, flags);
+            return tx_get_btc_signature_hash(tx, index, script, satoshi.value(), sighash, flags);
         }
 
         // Liquid case - has a value-commitment in place of a satoshi value
@@ -948,7 +950,7 @@ namespace sdk {
             const auto value = tx_confidential_value_from_satoshi(v);
             ct_value.assign(std::begin(value), std::end(value));
         }
-        return tx_get_elements_signature_hash(tx, index, script, ct_value, WALLY_SIGHASH_ALL, flags);
+        return tx_get_elements_signature_hash(tx, index, script, ct_value, sighash, flags);
     }
 
     void blind_address(
@@ -1033,7 +1035,8 @@ namespace sdk {
             GDK_RUNTIME_ASSERT(addr_type == address_type::p2sh);
             constexpr bool has_sighash = true;
             const auto user_sig = ec_sig_from_der(der, has_sighash);
-            tx_set_input_script(tx, index, input_script(is_low_r, script, user_sig));
+            const uint32_t user_sighash = der.back();
+            tx_set_input_script(tx, index, input_script(is_low_r, script, user_sig, user_sighash));
         }
     }
 

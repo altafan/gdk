@@ -564,15 +564,15 @@ namespace sdk {
         return ret;
     }
 
-    std::vector<unsigned char> ec_sig_to_der(byte_span_t sig, bool sighash)
+    std::vector<unsigned char> ec_sig_to_der(byte_span_t sig, bool has_sighash, uint32_t sighash)
     {
-        std::vector<unsigned char> der(EC_SIGNATURE_DER_MAX_LEN + (sighash ? 1 : 0));
+        std::vector<unsigned char> der(EC_SIGNATURE_DER_MAX_LEN + (has_sighash ? 1 : 0));
         size_t written;
         GDK_VERIFY(wally_ec_sig_to_der(sig.data(), sig.size(), der.data(), der.size(), &written));
         GDK_RUNTIME_ASSERT(written <= der.size());
         der.resize(written);
-        if (sighash) {
-            der.push_back(WALLY_SIGHASH_ALL);
+        if (has_sighash) {
+            der.push_back(sighash);
         }
         return der;
     }

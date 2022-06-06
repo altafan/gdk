@@ -246,7 +246,8 @@ namespace sdk {
     ecdsa_sig_t ec_sig_from_bytes(
         byte_span_t private_key, byte_span_t hash, uint32_t flags = EC_FLAG_ECDSA | EC_FLAG_GRIND_R);
 
-    std::vector<unsigned char> ec_sig_to_der(byte_span_t sig, bool sighash = false);
+    std::vector<unsigned char> ec_sig_to_der(
+        byte_span_t sig, bool has_sighash = false, uint32_t sighash = WALLY_SIGHASH_ALL);
     ecdsa_sig_t ec_sig_from_der(byte_span_t der, bool sighash = false);
 
     bool ec_sig_verify(
