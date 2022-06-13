@@ -937,6 +937,14 @@ namespace sdk {
         const uint32_t flags = is_segwit_address_type(utxo) ? WALLY_TX_FLAG_USE_WITNESS : 0;
         const uint32_t sighash = json_get_value(utxo, "user_sighash", WALLY_SIGHASH_ALL);
 
+        if (net_params.is_liquid()) {
+            GDK_RUNTIME_ASSERT_MSG(
+                sighash == WALLY_SIGHASH_ALL || sighash == (WALLY_SIGHASH_SINGLE | WALLY_SIGHASH_ANYONECANPAY),
+                "Unsupported sighash");
+        } else {
+            GDK_RUNTIME_ASSERT_MSG(sighash == WALLY_SIGHASH_ALL, "Unsupported sighash");
+        }
+
         if (!net_params.is_liquid()) {
             const amount satoshi{ v };
             return tx_get_btc_signature_hash(tx, index, script, satoshi.value(), sighash, flags);
